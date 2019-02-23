@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>get 请求</title>
+</head>
+<body>
+    <h1>get request</h1>
+    <input type="button" value="get request" id="btnajax">
+    <!-- 绑定点击事件 -->
+    <script type="text/javascript">
+    document.querySelector("#btnajax").onclick=function(){
+        //发送ajax需要5步
+
+        //1、创立异步对象
+        var ajaxObj=new XMLHttpRequest();
+        //2、设置请求的参数，包括方法和URL。
+        ajaxObj.open('get','02-ajax.php');
+        //3、发送请求
+        ajaxObj.send();
+
+        //4、注册事件。onreadystatechange事件，改变状态就会调用。如果要在数据请求回来时才调用，需要加入一些手写判断。
+        ajaxObj.onreadystatechange=function(){
+            //为了保证数据完整返回，我们会判断两个值。
+            if(ajaxObj.readystate==4 && ajaxObj.status==200){
+                //如果能判断这两个值，说明数据完整返回，请求的界面存在。
+                //5、在注册事件中，获取返回的内容并修改页面显示。
+                console.log("数据返回成功");
+                //数据是保存在异步对象的属性中
+                console.log(ajaxObj.responseText);
+                //修改页面的显示
+                document.querySelector('h1').innerHTML=ajaxObj.responseText;
+            }
+        }
+    }
+    </script>
+    
+</body>
+</html>

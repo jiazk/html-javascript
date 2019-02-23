@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ajx request post</h1>
+    <input type="button" value="post request" id="btnajx">
+    <script type="text/javascript">
+    document.querySelector('#btnAjax').onclick = function () {
+    //异步对象
+    var xhr=new XMLHttpRequest();
+    //设置属性
+    xhr.open('post','02.post.php');
+    //如果想要使用post提交数据，必须添加此行
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    //数据通过send方法传递  
+    xhr.send('name=fox&age=18');
+    //发送并接受返回值
+    xhr.onreadystatechange=function(){
+        //这步为服务器判断是否在正确响应
+        if(xhr.readyState==4&&xhr.status==200){
+            alert(xhr.responseText);
+        }
+    };
+    }
+    </script>
+    
+</body>
+</html>
