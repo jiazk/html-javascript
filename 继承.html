@@ -1,0 +1,69 @@
+<!-- 三种继承方法 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+    // 方式一：借助构造函数
+        function Parent1(){
+            this.name="parent mode";
+        }
+        Parent1.prototype.hehe="myname";
+        Parent1.prototype.say=function(){
+            
+        };
+        function Child1(){
+            Parent1.call(this);
+            this.type="child1 mode"
+        }
+        console.log(new Child1());
+        console.log(new Child1().hehe);
+        // console.log(new Child1().say()); 原型的函数没法继承
+
+
+
+    // 方法二：通过原型链实现继承
+    function Parent2(){
+        this.name="parent mode2";
+        this.arr=[1,2,3];
+    }
+    function Child2(){
+        this.type="child mode2"
+    }
+    Child2.prototype=new Parent2();
+    var child21=new Child2();
+    var child22=new Child2();
+    child21.name="child21 name";
+    console.log('child21 name:'+child21.name);
+    console.log('child22 name:'+child22.name);
+    child21.arr.push(4);
+    console.log('child22s arr:'+child22.arr);
+    //修改child21的属性，child22的属性也自动变化；
+    // 方法三：组合的方式：构造函数 + 原型链
+    function Parent3(){
+        this.name="parent3";
+        this.arr=[5,6,7];
+
+    }
+    function Child3(){
+        Parent3.call(this);//执行parent方法
+        this.type='Child mode';
+
+    }
+    Child3.prototype=new Parent3();//第二次执行parent方法
+    var child=new Child3();
+    console.log(child.name);
+
+
+        </script>
+    
+</body>
+</html>
